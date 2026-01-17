@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ResultAPIResponse, ProcessedData } from "./types";
 import { marksToGrade } from "./utils";
 import StudentHeader from "@/components/result/StudentHeader";
@@ -13,8 +12,9 @@ import DetailedResultsTable from "@/components/result/DetailedResultsTable";
 import SemesterStatsCard from "@/components/result/SemesterStatsCard";
 import SemesterBarChart from "@/components/result/SemesterBarChart";
 import GradeCircleChart from "@/components/result/GradeCircleChart";
+import FloatingElements from "@/components/result/FloatingElements";
 import LoginForm from "@/components/result/LoginForm";
-import { Loader2 } from "lucide-react";
+import { Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 // Filter to only keep latest attempt for each subject code
@@ -335,14 +335,17 @@ export default function ResultsPage() {
 
   return (
     <>
-      {/* Grid pattern overlay */}
+      {/* Enhanced grid pattern overlay */}
       <div
-        className="absolute inset-0 opacity-5"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `linear-gradient(#a855f7 1px, transparent 1px), linear-gradient(90deg, #a855f7 1px, transparent 1px)`,
-          backgroundSize: "50px 50px",
+          backgroundSize: "60px 60px",
         }}
-      ></div>
+      />
+
+      {/* Global floating elements */}
+      <FloatingElements variant="default" />
 
       <div className="min-h-[70vh] p-4 relative">
         <div className="w-full max-w-7xl mb-6 mx-auto">
@@ -365,7 +368,8 @@ export default function ResultsPage() {
               />
             </div>
           ) : processedData ? (
-            <div className="space-y-6">
+            <div className="space-y-8">
+              {/* Student Header */}
               <StudentHeader
                 data={processedData}
                 selectedSemester={selectedSemester}
@@ -376,13 +380,15 @@ export default function ResultsPage() {
 
               {selectedSemester === "OVERALL" ? (
                 <>
-                  {/* Charts Row */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Charts Row - GPA Trend and Grade Distribution */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <GPATrendChart data={processedData.gpaTrend} />
                     <GradeDistributionChart
                       data={processedData.gradeDistribution}
                     />
                   </div>
+                  
+                  {/* Semester Summary with floating cards */}
                   <SemesterSummaryTable semesters={processedData.semesters} />
                 </>
               ) : (
@@ -401,7 +407,7 @@ export default function ResultsPage() {
 
                     return (
                       <>
-                        {/* Stats Summary */}
+                        {/* 3D Floating Stats Cards */}
                         <SemesterStatsCard
                           totalMarks={currentSemester.totalMarks}
                           maxMarks={maxMarks}
@@ -415,7 +421,6 @@ export default function ResultsPage() {
                           <SemesterBarChart
                             subjects={currentSemester.filteredSubjects}
                           />
-                          {/* Grade Distribution */}
                           <GradeCircleChart
                             subjects={currentSemester.filteredSubjects}
                           />
@@ -426,6 +431,7 @@ export default function ResultsPage() {
                 </>
               )}
 
+              {/* Detailed Results Table */}
               <DetailedResultsTable
                 results={filteredResults}
                 selectedSemester={selectedSemester}
@@ -434,49 +440,55 @@ export default function ResultsPage() {
                 onToggleMarksBreakdown={setShowMarksBreakdown}
               />
 
-              {/* Back Button */}
-              <div className="flex justify-center">
+              {/* Back Button with floating effect */}
+              <div className="flex justify-center pt-4">
                 <Button
                   onClick={handleReset}
                   variant="outline"
-                  className="border-zinc-700 bg-zinc-800 hover:bg-zinc-700 text-white"
+                  className="group relative border-zinc-700 bg-zinc-800/80 hover:bg-zinc-700/80 text-white hover:border-purple-500/30 transition-all duration-300 px-6 py-5"
                 >
+                  <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Sparkles className="w-4 h-4 mr-2 text-purple-400 group-hover:animate-pulse" />
                   Check Another Result
                 </Button>
               </div>
             </div>
           ) : (
             <div className="h-[70vh] flex items-center justify-center">
-              <Card className="bg-zinc-900/95 border-zinc-800 max-w-md mx-auto shadow-2xl backdrop-blur-sm">
-                <CardContent className="p-12 text-center">
-                  <div className="flex flex-col items-center gap-6">
-                    {/* Animated Spinner */}
-                    <div className="relative">
-                      <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-xl animate-pulse"></div>
-                      <div className="relative bg-zinc-800 rounded-full p-4 border border-zinc-700">
-                        <Loader2 className="w-12 h-12 text-purple-500 animate-spin" />
+              {/* Loading state with floating animation */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-purple-500/20 rounded-2xl blur-2xl animate-pulse-glow" />
+                <div className="relative glass rounded-2xl border border-zinc-800/50 max-w-md mx-auto shadow-2xl overflow-hidden">
+                  <div className="p-12 text-center">
+                    <div className="flex flex-col items-center gap-6">
+                      {/* Animated Spinner */}
+                      <div className="relative">
+                        <div className="absolute inset-0 rounded-full bg-purple-500/30 blur-xl animate-pulse"></div>
+                        <div className="relative bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-full p-5 border border-zinc-700">
+                          <Loader2 className="w-10 h-10 text-purple-400 animate-spin" />
+                        </div>
+                      </div>
+
+                      {/* Loading Text */}
+                      <div className="space-y-2">
+                        <h3 className="text-xl font-bold text-white">
+                          Loading Results
+                        </h3>
+                        <p className="text-sm text-zinc-500">
+                          Please wait while we fetch your data...
+                        </p>
+                      </div>
+
+                      {/* Animated Dots */}
+                      <div className="flex gap-2">
+                        <div className="w-2.5 h-2.5 bg-purple-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                        <div className="w-2.5 h-2.5 bg-violet-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                        <div className="w-2.5 h-2.5 bg-fuchsia-500 rounded-full animate-bounce"></div>
                       </div>
                     </div>
-
-                    {/* Loading Text */}
-                    <div className="space-y-2">
-                      <h3 className="text-xl font-semibold text-white">
-                        Loading Results
-                      </h3>
-                      <p className="text-sm text-zinc-400">
-                        Please wait while we fetch your data...
-                      </p>
-                    </div>
-
-                    {/* Animated Dots */}
-                    <div className="flex gap-2">
-                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"></div>
-                    </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
           )}
         </div>
