@@ -34,30 +34,30 @@ export default function DetailedResultsTable({
   const getGradeBadgeClass = (grade: string) => {
     switch (grade) {
       case "O":
-        return "bg-gradient-to-r from-green-500/30 to-emerald-500/20 text-green-400 border-green-500/30 shadow-green-500/20";
+        return "bg-gradient-to-r from-lime-400/40 to-emerald-400/30 text-lime-300 border-lime-400/50 shadow-lg shadow-lime-500/30 animate-pulse";
       case "A+":
-        return "bg-gradient-to-r from-purple-500/30 to-violet-500/20 text-purple-300 border-purple-500/30 shadow-purple-500/20";
+        return "bg-gradient-to-r from-fuchsia-500/40 to-pink-500/30 text-fuchsia-300 border-fuchsia-500/50 shadow-lg shadow-fuchsia-500/30";
       case "A":
-        return "bg-gradient-to-r from-blue-500/30 to-indigo-500/20 text-blue-400 border-blue-500/30 shadow-blue-500/20";
+        return "bg-gradient-to-r from-cyan-500/40 to-blue-500/30 text-cyan-300 border-cyan-500/50 shadow-lg shadow-cyan-500/30";
       case "B+":
-        return "bg-gradient-to-r from-cyan-500/30 to-teal-500/20 text-cyan-400 border-cyan-500/30 shadow-cyan-500/20";
+        return "bg-gradient-to-r from-sky-400/40 to-indigo-500/30 text-sky-300 border-sky-400/50 shadow-lg shadow-sky-500/30";
       case "B":
-        return "bg-gradient-to-r from-yellow-500/30 to-amber-500/20 text-yellow-400 border-yellow-500/30 shadow-yellow-500/20";
+        return "bg-gradient-to-r from-amber-400/40 to-orange-400/30 text-amber-300 border-amber-400/50 shadow-lg shadow-amber-500/30";
       case "C":
-        return "bg-gradient-to-r from-orange-500/30 to-amber-500/20 text-orange-400 border-orange-500/30 shadow-orange-500/20";
+        return "bg-gradient-to-r from-orange-500/40 to-red-400/30 text-orange-300 border-orange-500/50 shadow-lg shadow-orange-500/30";
       case "P":
-        return "bg-gradient-to-r from-zinc-500/30 to-slate-500/20 text-zinc-300 border-zinc-500/30 shadow-zinc-500/20";
+        return "bg-gradient-to-r from-violet-500/40 to-purple-500/30 text-violet-300 border-violet-500/50 shadow-lg shadow-violet-500/30";
       default:
-        return "bg-gradient-to-r from-red-500/30 to-rose-500/20 text-red-400 border-red-500/30 shadow-red-500/20";
+        return "bg-gradient-to-r from-red-600/40 to-rose-600/30 text-red-300 border-red-600/50 shadow-lg shadow-red-600/30";
     }
   };
 
   const getMarksColor = (marks: number) => {
-    if (marks >= 90) return "text-green-400";
-    if (marks >= 75) return "text-purple-400";
-    if (marks >= 60) return "text-blue-400";
-    if (marks >= 45) return "text-yellow-400";
-    return "text-red-400";
+    if (marks >= 90) return "text-lime-400 font-extrabold";
+    if (marks >= 75) return "text-fuchsia-400 font-extrabold";
+    if (marks >= 60) return "text-cyan-400 font-bold";
+    if (marks >= 45) return "text-amber-400 font-semibold";
+    return "text-rose-400 font-semibold";
   };
 
   if (selectedSemester === "OVERALL") {
@@ -76,23 +76,23 @@ export default function DetailedResultsTable({
 
     return (
       <div className="relative animate-slide-up stagger-5">
-        {/* Glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-violet-600/5 rounded-2xl blur-xl opacity-50" />
+        {/* Vibrant glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 via-cyan-500/15 to-amber-500/20 rounded-2xl blur-2xl opacity-60" />
         
         {/* Main card */}
-        <div className="relative glass rounded-2xl border border-zinc-800/50 overflow-hidden">
+        <div className="relative glass rounded-2xl border-2 border-transparent bg-gradient-to-r from-fuchsia-500/20 via-cyan-500/10 to-amber-500/20 overflow-hidden shadow-2xl shadow-fuchsia-500/20">
           {/* Header */}
-          <div className="p-4 sm:p-6 border-b border-zinc-800/50">
+          <div className="p-4 sm:p-6 border-b border-zinc-800/50 bg-gradient-to-r from-zinc-900/80 to-zinc-800/60">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 animate-float" style={{ animationDuration: '4s' }}>
+                <div className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-br from-fuchsia-500 via-purple-500 to-cyan-500 animate-float shadow-xl shadow-fuchsia-500/40" style={{ animationDuration: '4s' }}>
                   <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white">
+                  <h3 className="text-base sm:text-lg font-bold bg-gradient-to-r from-fuchsia-300 via-cyan-300 to-amber-300 bg-clip-text text-transparent">
                     COMPLETE TRANSCRIPT
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-500">
+                  <p className="text-xs sm:text-sm text-zinc-400">
                     {results.length} subjects across all semesters
                   </p>
                 </div>
@@ -128,31 +128,31 @@ export default function DetailedResultsTable({
                   style={{ animationDelay: `${semIndex * 0.1}s` }}
                 >
                   {/* Semester Header */}
-                  <div className="bg-gradient-to-r from-zinc-800/80 to-zinc-900/50 px-3 sm:px-5 py-3 sm:py-4 border-b border-zinc-700/50">
+                  <div className="bg-gradient-to-r from-fuchsia-900/60 via-purple-900/40 to-cyan-900/60 px-3 sm:px-5 py-3 sm:py-4 border-b border-zinc-700/50">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
                       <div className="flex items-center gap-2 sm:gap-3">
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-500/20 flex-shrink-0">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-fuchsia-500 via-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-xl shadow-fuchsia-500/40 flex-shrink-0">
                           {semNum}
                         </div>
                         <div>
-                          <h4 className="text-sm sm:text-base text-white font-semibold">
+                          <h4 className="text-sm sm:text-base bg-gradient-to-r from-fuchsia-300 to-cyan-300 bg-clip-text text-transparent font-semibold">
                             Semester {semNum}
                           </h4>
-                          <p className="text-[10px] sm:text-xs text-zinc-500">{semResults.length} subjects</p>
+                          <p className="text-[10px] sm:text-xs text-zinc-400">{semResults.length} subjects</p>
                         </div>
                       </div>
                       {semData && (
                         <div className="flex gap-2 flex-wrap">
-                          <div className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-800/80 border border-zinc-700/50">
-                            <span className="text-[10px] sm:text-xs text-zinc-500">Total: </span>
+                          <div className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/30 to-blue-500/20 border border-cyan-400/50">
+                            <span className="text-[10px] sm:text-xs text-cyan-300">Total: </span>
                             <span className="text-xs sm:text-sm font-semibold text-white">{semData.totalMarks}</span>
                           </div>
-                          <div className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-purple-500/20 border border-purple-500/30">
-                            <span className="text-[10px] sm:text-xs text-zinc-400">SGPA: </span>
-                            <span className="text-xs sm:text-sm font-bold text-purple-400">{semData.sgpa.toFixed(2)}</span>
+                          <div className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-fuchsia-500/30 to-pink-500/20 border border-fuchsia-400/50">
+                            <span className="text-[10px] sm:text-xs text-fuchsia-300">SGPA: </span>
+                            <span className="text-xs sm:text-sm font-bold text-white">{semData.sgpa.toFixed(2)}</span>
                           </div>
-                          <div className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-800/80 border border-zinc-700/50">
-                            <span className="text-[10px] sm:text-xs text-zinc-500">Credits: </span>
+                          <div className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-amber-500/30 to-orange-500/20 border border-amber-400/50">
+                            <span className="text-[10px] sm:text-xs text-amber-300">Credits: </span>
                             <span className="text-xs sm:text-sm font-semibold text-white">{semData.credits}</span>
                           </div>
                         </div>
@@ -257,25 +257,25 @@ export default function DetailedResultsTable({
   // Single semester view
   return (
     <div className="relative animate-slide-up stagger-5">
-      {/* Glow effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-violet-600/5 rounded-2xl blur-xl opacity-50" />
+      {/* Vibrant glow effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-fuchsia-500/15 to-amber-500/20 rounded-2xl blur-2xl opacity-60" />
       
       {/* Main card */}
-      <div className="relative glass rounded-2xl border border-zinc-800/50 overflow-hidden">
+      <div className="relative glass rounded-2xl border-2 border-transparent bg-gradient-to-r from-cyan-500/20 via-fuchsia-500/10 to-amber-500/20 overflow-hidden shadow-2xl shadow-cyan-500/20">
         {/* Header */}
-        <div className="p-4 sm:p-6 border-b border-zinc-800/50">
+        <div className="p-4 sm:p-6 border-b border-zinc-800/50 bg-gradient-to-r from-zinc-900/80 to-zinc-800/60">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
             <div className="flex items-center gap-2 sm:gap-3">
-              <div className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 animate-float" style={{ animationDuration: '4s' }}>
+              <div className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-br from-cyan-500 via-purple-500 to-fuchsia-500 animate-float shadow-xl shadow-cyan-500/40" style={{ animationDuration: '4s' }}>
                 <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
               <div>
-                <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                  SEMESTER {selectedSemester}
-                  <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-500" />
-                  <span className="text-purple-400">RESULTS</span>
+                <h3 className="text-base sm:text-lg font-bold flex items-center gap-2">
+                  <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">SEMESTER {selectedSemester}</span>
+                  <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-400" />
+                  <span className="bg-gradient-to-r from-fuchsia-300 to-pink-300 bg-clip-text text-transparent">RESULTS</span>
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-500">
+                <p className="text-xs sm:text-sm text-zinc-400">
                   {results.length} subjects
                 </p>
               </div>
