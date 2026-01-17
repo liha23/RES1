@@ -74,28 +74,28 @@ export default function GradeDistributionChart({
       {/* Main card */}
       <div className="relative glass rounded-2xl border border-zinc-800/50 overflow-hidden transform transition-all duration-500 group-hover:border-purple-500/30">
         {/* Header */}
-        <div className="p-6 pb-0">
-          <div className="flex items-start justify-between mb-4">
+        <div className="p-4 sm:p-6 pb-0">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-0 mb-3 sm:mb-4">
             <div>
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <span className="inline-flex p-2 rounded-lg bg-gradient-to-br from-fuchsia-500 to-pink-600 mr-1 animate-float" style={{ animationDuration: '4.5s' }}>
-                  <Award className="w-4 h-4 text-white" />
+              <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                <span className="inline-flex p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-fuchsia-500 to-pink-600 mr-1 animate-float" style={{ animationDuration: '4.5s' }}>
+                  <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
                 </span>
                 GRADE SPECTRUM
               </h3>
-              <p className="text-sm text-zinc-500 mt-1">Distribution across all subjects</p>
+              <p className="text-xs sm:text-sm text-zinc-500 mt-0.5 sm:mt-1">Distribution across all subjects</p>
             </div>
             
             {/* Stats */}
-            <div className="flex flex-col gap-2 items-end">
-              <div className="px-3 py-1.5 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/30">
-                <span className="text-xs text-zinc-400">Total: </span>
-                <span className="text-sm font-bold text-fuchsia-400">{totalSubjects}</span>
+            <div className="flex gap-2 items-start">
+              <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/30">
+                <span className="text-[10px] sm:text-xs text-zinc-400">Total: </span>
+                <span className="text-xs sm:text-sm font-bold text-fuchsia-400">{totalSubjects}</span>
               </div>
               {topGrade && (
-                <div className="px-3 py-1.5 rounded-full bg-green-500/20 border border-green-500/30">
-                  <span className="text-xs text-zinc-400">Most: </span>
-                  <span className="text-sm font-bold text-green-400">{topGrade.grade}</span>
+                <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-green-500/20 border border-green-500/30">
+                  <span className="text-[10px] sm:text-xs text-zinc-400">Most: </span>
+                  <span className="text-xs sm:text-sm font-bold text-green-400">{topGrade.grade}</span>
                 </div>
               )}
             </div>
@@ -103,9 +103,9 @@ export default function GradeDistributionChart({
         </div>
 
         {/* Chart */}
-        <div className="px-6 pb-6">
+        <div className="px-4 sm:px-6 pb-4 sm:pb-6">
           {chartData.length > 0 ? (
-            <ChartContainer config={{}} className="h-[250px] w-full">
+            <ChartContainer config={{}} className="h-[200px] sm:h-[250px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <defs>
