@@ -24,7 +24,7 @@ export const metadata = generateMetadataUtil({
     "IPU BTech result",
     "GGSIPU latest result",
   ],
-  url: "https://www.smriti.live/result",
+  url: "https://www.ipuresult.tech/result",
 });
 
 export default function ResultLayout({

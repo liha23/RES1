@@ -18,7 +18,7 @@ export function generateMetadataUtil(pageData: PageMetadata): Metadata {
   const defaultDescription =
     "Check IPU results instantly: semester-wise marks, CGPA, SGPA, subject grades. Fast, mobile-friendly result checker for Guru Gobind Singh Indraprastha University students.";
   const defaultImage = "/opengraph-image.png";
-  const siteUrl = "https://www.smriti.live/result";
+  const siteUrl = "https://www.ipuresult.tech/result";
 
   const fullTitle =
     pageData.title === baseTitle ||
