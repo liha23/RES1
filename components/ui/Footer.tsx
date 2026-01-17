@@ -79,7 +79,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <p className="text-xs text-zinc-500">
-            © {new Date().getFullYear()} IPU Grade Portal. All rights reserved.
+            © {new Date().getFullYear()} IPURESULT. All rights reserved.
           </p>
         </div>
       </div>

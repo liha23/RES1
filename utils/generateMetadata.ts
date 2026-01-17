@@ -14,9 +14,9 @@ export interface PageMetadata {
 }
 
 export function generateMetadataUtil(pageData: PageMetadata): Metadata {
-  const baseTitle = "GGSIPU Result";
+  const baseTitle = "IPURESULT";
   const defaultDescription =
-    "Check GGSIPU (IPU) results instantly: semester-wise marks, CGPA, SGPA, subject grades. Fast, mobile-friendly portal for Guru Gobind Singh Indraprastha University students.";
+    "Check IPU results instantly: semester-wise marks, CGPA, SGPA, subject grades. Fast, mobile-friendly result checker for Guru Gobind Singh Indraprastha University students.";
   const defaultImage = "/opengraph-image.png";
   const siteUrl = "https://www.smriti.live/result";
 

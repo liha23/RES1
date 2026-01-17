@@ -1,9 +1,9 @@
 import { generateMetadataUtil } from "@/utils/generateMetadata";
 
 export const metadata = generateMetadataUtil({
-  title: "GGSIPU Result 2025-2026 | Check IPU Semester Results Online Fast",
+  title: "IPURESULT",
   description:
-    "Check GGSIPU (IPU) results 2025-2026 instantly: semester-wise marks, CGPA, SGPA, subject grades, and rank. Fast, mobile-friendly portal for Guru Gobind Singh Indraprastha University students. Enter roll number to view latest exam results.",
+    "Check IPU results 2025-2026 instantly: semester-wise marks, CGPA, SGPA, subject grades, and rank. Fast, mobile-friendly result checker for Guru Gobind Singh Indraprastha University students. Enter roll number to view latest exam results.",
   keywords: [
     "GGSIPU result",
     "IPU result",
