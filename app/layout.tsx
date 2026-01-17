@@ -10,7 +10,7 @@ import {
 export const metadata = generateMetadataUtil({
   title: "IPURESULT",
   description:
-    "Check GGSIPU (IPU) results 2025-2026 instantly: semester-wise marks, CGPA, SGPA, subject grades, and rank. Fast, mobile-friendly portal for Guru Gobind Singh Indraprastha University students.",
+    "Check IPU results 2025-2026 instantly: semester-wise marks, CGPA, SGPA, subject grades, and rank. Fast, mobile-friendly result checker for Guru Gobind Singh Indraprastha University students.",
   keywords: [
     "GGSIPU result",
     "IPU result",
