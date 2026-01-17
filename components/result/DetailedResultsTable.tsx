@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import {
   Table,
@@ -15,6 +14,7 @@ import {
   ProcessedSemester,
 } from "../../app/(public)/result/types";
 import { marksToGrade } from "../../app/(public)/result/utils";
+import { FileText, ChevronRight } from "lucide-react";
 
 interface DetailedResultsTableProps {
   results: ResultAPIResponse[];
@@ -34,22 +34,30 @@ export default function DetailedResultsTable({
   const getGradeBadgeClass = (grade: string) => {
     switch (grade) {
       case "O":
-        return "bg-primary/20 text-primary";
+        return "bg-gradient-to-r from-green-500/30 to-emerald-500/20 text-green-400 border-green-500/30 shadow-green-500/20";
       case "A+":
-        return "bg-green-500/20 text-green-400";
+        return "bg-gradient-to-r from-purple-500/30 to-violet-500/20 text-purple-300 border-purple-500/30 shadow-purple-500/20";
       case "A":
-        return "bg-blue-500/20 text-blue-400";
+        return "bg-gradient-to-r from-blue-500/30 to-indigo-500/20 text-blue-400 border-blue-500/30 shadow-blue-500/20";
       case "B+":
-        return "bg-cyan-500/20 text-cyan-400";
+        return "bg-gradient-to-r from-cyan-500/30 to-teal-500/20 text-cyan-400 border-cyan-500/30 shadow-cyan-500/20";
       case "B":
-        return "bg-yellow-500/20 text-yellow-400";
+        return "bg-gradient-to-r from-yellow-500/30 to-amber-500/20 text-yellow-400 border-yellow-500/30 shadow-yellow-500/20";
       case "C":
-        return "bg-orange-500/20 text-orange-400";
+        return "bg-gradient-to-r from-orange-500/30 to-amber-500/20 text-orange-400 border-orange-500/30 shadow-orange-500/20";
       case "P":
-        return "bg-zinc-500/20 text-zinc-400";
+        return "bg-gradient-to-r from-zinc-500/30 to-slate-500/20 text-zinc-300 border-zinc-500/30 shadow-zinc-500/20";
       default:
-        return "bg-red-500/20 text-red-400";
+        return "bg-gradient-to-r from-red-500/30 to-rose-500/20 text-red-400 border-red-500/30 shadow-red-500/20";
     }
+  };
+
+  const getMarksColor = (marks: number) => {
+    if (marks >= 90) return "text-green-400";
+    if (marks >= 75) return "text-purple-400";
+    if (marks >= 60) return "text-blue-400";
+    if (marks >= 45) return "text-yellow-400";
+    return "text-red-400";
   };
 
   if (selectedSemester === "OVERALL") {
@@ -67,155 +75,166 @@ export default function DetailedResultsTable({
       .sort((a, b) => a - b);
 
     return (
-      <Card className="bg-zinc-900/95 border-zinc-800">
-        <CardContent className="p-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-1">
-                DETAILED RESULTS - ALL SEMESTERS
-              </h3>
-              <p className="text-sm text-zinc-400">
-                Showing all {results.length} subjects across all semesters
-              </p>
-            </div>
-            {onToggleMarksBreakdown && (
-              <div className="flex items-center gap-3 shrink-0">
-                <label
-                  htmlFor="marks-breakdown-toggle-overall"
-                  className="text-sm text-zinc-400 cursor-pointer"
-                >
-                  Show Marks Breakdown
-                </label>
-                <Switch
-                  id="marks-breakdown-toggle-overall"
-                  checked={showMarksBreakdown}
-                  onCheckedChange={onToggleMarksBreakdown}
-                />
+      <div className="relative animate-slide-up stagger-5">
+        {/* Glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-violet-600/5 rounded-2xl blur-xl opacity-50" />
+        
+        {/* Main card */}
+        <div className="relative glass rounded-2xl border border-zinc-800/50 overflow-hidden">
+          {/* Header */}
+          <div className="p-6 border-b border-zinc-800/50">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 animate-float" style={{ animationDuration: '4s' }}>
+                  <FileText className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white">
+                    COMPLETE TRANSCRIPT
+                  </h3>
+                  <p className="text-sm text-zinc-500">
+                    {results.length} subjects across all semesters
+                  </p>
+                </div>
               </div>
-            )}
+              {onToggleMarksBreakdown && (
+                <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-zinc-800/50 border border-zinc-700/50">
+                  <label
+                    htmlFor="marks-breakdown-toggle-overall"
+                    className="text-sm text-zinc-400 cursor-pointer"
+                  >
+                    Show Details
+                  </label>
+                  <Switch
+                    id="marks-breakdown-toggle-overall"
+                    checked={showMarksBreakdown}
+                    onCheckedChange={onToggleMarksBreakdown}
+                  />
+                </div>
+              )}
+            </div>
           </div>
-          <div className="overflow-x-auto space-y-6">
-            {sortedSemesters.map((semNum) => {
+          
+          {/* Content */}
+          <div className="p-6 space-y-6">
+            {sortedSemesters.map((semNum, semIndex) => {
               const semResults = groupedBySemester[semNum];
               const semData = semesters.find((s) => s.euno === semNum);
 
               return (
                 <div
                   key={semNum}
-                  className="border border-zinc-800 rounded-lg overflow-hidden"
+                  className="rounded-xl border border-zinc-800/50 overflow-hidden bg-zinc-900/30 animate-scale-in"
+                  style={{ animationDelay: `${semIndex * 0.1}s` }}
                 >
                   {/* Semester Header */}
-                  <div className="bg-zinc-800/50 px-4 py-3 border-b border-zinc-700">
-                    <div className="flex items-center justify-between flex-wrap gap-2">
-                      <h4 className="text-white font-semibold text-lg">
-                        SEMESTER {semNum}
-                      </h4>
+                  <div className="bg-gradient-to-r from-zinc-800/80 to-zinc-900/50 px-5 py-4 border-b border-zinc-700/50">
+                    <div className="flex items-center justify-between flex-wrap gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-white font-bold shadow-lg shadow-purple-500/20">
+                          {semNum}
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold">
+                            Semester {semNum}
+                          </h4>
+                          <p className="text-xs text-zinc-500">{semResults.length} subjects</p>
+                        </div>
+                      </div>
                       {semData && (
-                        <div className="flex gap-4 text-sm">
-                          <span className="text-zinc-400">
-                            Total:{" "}
-                            <span className="text-white font-medium">
-                              {semData.totalMarks}
-                            </span>
-                          </span>
-                          <span className="text-zinc-400">
-                            SGPA:{" "}
-                            <span className="text-primary font-semibold">
-                              {semData.sgpa.toFixed(2)}
-                            </span>
-                          </span>
-                          <span className="text-zinc-400">
-                            Credits:{" "}
-                            <span className="text-white font-medium">
-                              {semData.credits}
-                            </span>
-                          </span>
+                        <div className="flex gap-3">
+                          <div className="px-3 py-1.5 rounded-lg bg-zinc-800/80 border border-zinc-700/50">
+                            <span className="text-xs text-zinc-500">Total: </span>
+                            <span className="text-sm font-semibold text-white">{semData.totalMarks}</span>
+                          </div>
+                          <div className="px-3 py-1.5 rounded-lg bg-purple-500/20 border border-purple-500/30">
+                            <span className="text-xs text-zinc-400">SGPA: </span>
+                            <span className="text-sm font-bold text-purple-400">{semData.sgpa.toFixed(2)}</span>
+                          </div>
+                          <div className="px-3 py-1.5 rounded-lg bg-zinc-800/80 border border-zinc-700/50">
+                            <span className="text-xs text-zinc-500">Credits: </span>
+                            <span className="text-sm font-semibold text-white">{semData.credits}</span>
+                          </div>
                         </div>
                       )}
                     </div>
                   </div>
 
                   {/* Semester Table */}
-                  <div className="-mx-4 px-4">
-                    <Table className="w-full min-w-[600px]">
+                  <div className="overflow-x-auto">
+                    <Table className="w-full">
                       <TableHeader>
-                        <TableRow className="border-b border-zinc-700 bg-zinc-900/50 hover:bg-zinc-900/50">
-                          {/* Mobile: Combined column, Desktop: Separate columns */}
-                          <TableHead className="text-left p-3 text-white font-semibold md:hidden w-[180px]">
-                            SUBJECT
+                        <TableRow className="border-b border-zinc-800/50 bg-zinc-900/50 hover:bg-zinc-900/50">
+                          <TableHead className="text-left p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider md:hidden">
+                            Subject
                           </TableHead>
-                          <TableHead className="text-left p-3 text-white font-semibold hidden md:table-cell">
-                            PAPER CODE
+                          <TableHead className="text-left p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider hidden md:table-cell">
+                            Code
                           </TableHead>
-                          <TableHead className="text-left p-3 text-white font-semibold hidden md:table-cell">
-                            SUBJECT NAME
+                          <TableHead className="text-left p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider hidden md:table-cell">
+                            Subject Name
                           </TableHead>
                           {showMarksBreakdown && (
                             <>
-                              <TableHead className="text-center p-3 text-white font-semibold hidden md:table-cell">
-                                INTERNAL
+                              <TableHead className="text-center p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider hidden md:table-cell">
+                                Internal
                               </TableHead>
-                              <TableHead className="text-center p-3 text-white font-semibold hidden md:table-cell">
-                                EXTERNAL
+                              <TableHead className="text-center p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider hidden md:table-cell">
+                                External
                               </TableHead>
                             </>
                           )}
-                          <TableHead className="text-center p-3 text-white font-semibold w-[70px]">
-                            TOTAL
+                          <TableHead className="text-center p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider">
+                            Total
                           </TableHead>
-                          <TableHead className="text-center p-3 text-white font-semibold">
-                            GRADE
+                          <TableHead className="text-center p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider">
+                            Grade
                           </TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         {semResults.map((result, index) => {
-                          const totalMarks =
-                            parseFloat(result.moderatedprint) || 0;
+                          const totalMarks = parseFloat(result.moderatedprint) || 0;
                           const grade = marksToGrade(totalMarks);
                           return (
                             <TableRow
                               key={`${result.papercode}-${index}`}
-                              className="border-b border-zinc-800 hover:bg-zinc-800/30 transition-colors"
+                              className="border-b border-zinc-800/30 hover:bg-zinc-800/20 transition-colors group"
                             >
                               {/* Mobile: Combined column */}
-                              <TableCell className="p-3 text-zinc-200 md:hidden min-w-0 max-w-[200px]">
-                                <div className="flex flex-col min-w-0">
-                                  <span className="text-xs text-zinc-400 font-mono mb-1">
+                              <TableCell className="p-4 md:hidden">
+                                <div className="flex flex-col gap-1">
+                                  <span className="text-[10px] text-zinc-500 font-mono">
                                     {result.papercode}
                                   </span>
-                                  <span className="text-sm md:text-base text-wrap">
+                                  <span className="text-sm text-white">
                                     {result.papername}
                                   </span>
                                 </div>
                               </TableCell>
-                              {/* Desktop: Separate columns */}
-                              <TableCell className="p-3 text-zinc-300 font-mono text-sm hidden md:table-cell">
+                              {/* Desktop columns */}
+                              <TableCell className="p-4 text-zinc-400 font-mono text-sm hidden md:table-cell">
                                 {result.papercode}
                               </TableCell>
-                              <TableCell className="p-3 text-zinc-200 hidden md:table-cell">
+                              <TableCell className="p-4 text-white hidden md:table-cell">
                                 {result.papername}
                               </TableCell>
                               {showMarksBreakdown && (
                                 <>
-                                  <TableCell className="p-3 text-center text-zinc-300 hidden md:table-cell">
-                                    {result.minorprint === "-"
-                                      ? "-"
-                                      : result.minorprint}
+                                  <TableCell className="p-4 text-center text-zinc-400 hidden md:table-cell">
+                                    {result.minorprint === "-" ? "-" : result.minorprint}
                                   </TableCell>
-                                  <TableCell className="p-3 text-center text-zinc-300 hidden md:table-cell">
+                                  <TableCell className="p-4 text-center text-zinc-400 hidden md:table-cell">
                                     {result.majorprint}
                                   </TableCell>
                                 </>
                               )}
-                              <TableCell className="p-3 text-center text-white font-semibold">
+                              <TableCell className={`p-4 text-center font-bold ${getMarksColor(totalMarks)}`}>
                                 {result.moderatedprint}
                               </TableCell>
-                              <TableCell className="p-3 text-center">
+                              <TableCell className="p-4 text-center">
                                 <span
-                                  className={`px-2 py-1 rounded text-sm font-semibold ${getGradeBadgeClass(
-                                    grade
-                                  )}`}
+                                  className={`inline-flex px-3 py-1 rounded-lg text-xs font-bold border shadow-sm ${getGradeBadgeClass(grade)}`}
                                 >
                                   {grade}
                                 </span>
@@ -230,69 +249,84 @@ export default function DetailedResultsTable({
               );
             })}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   // Single semester view
   return (
-    <Card className="bg-zinc-900/95 border-zinc-800">
-      <CardContent className="p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-1">
-              SEMESTER {selectedSemester} - DETAILED RESULTS
-            </h3>
-            <p className="text-sm text-zinc-400">
-              Showing {results.length} subjects
-            </p>
-          </div>
-          {onToggleMarksBreakdown && (
-            <div className="flex items-center gap-3 shrink-0">
-              <label
-                htmlFor="marks-breakdown-toggle-semester"
-                className="text-sm text-zinc-400 cursor-pointer"
-              >
-                Show Marks Breakdown
-              </label>
-              <Switch
-                id="marks-breakdown-toggle-semester"
-                checked={showMarksBreakdown}
-                onCheckedChange={onToggleMarksBreakdown}
-              />
+    <div className="relative animate-slide-up stagger-5">
+      {/* Glow effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-violet-600/5 rounded-2xl blur-xl opacity-50" />
+      
+      {/* Main card */}
+      <div className="relative glass rounded-2xl border border-zinc-800/50 overflow-hidden">
+        {/* Header */}
+        <div className="p-6 border-b border-zinc-800/50">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 animate-float" style={{ animationDuration: '4s' }}>
+                <FileText className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  SEMESTER {selectedSemester}
+                  <ChevronRight className="w-4 h-4 text-zinc-500" />
+                  <span className="text-purple-400">RESULTS</span>
+                </h3>
+                <p className="text-sm text-zinc-500">
+                  {results.length} subjects
+                </p>
+              </div>
             </div>
-          )}
+            {onToggleMarksBreakdown && (
+              <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-zinc-800/50 border border-zinc-700/50">
+                <label
+                  htmlFor="marks-breakdown-toggle-semester"
+                  className="text-sm text-zinc-400 cursor-pointer"
+                >
+                  Show Details
+                </label>
+                <Switch
+                  id="marks-breakdown-toggle-semester"
+                  checked={showMarksBreakdown}
+                  onCheckedChange={onToggleMarksBreakdown}
+                />
+              </div>
+            )}
+          </div>
         </div>
-        <div className="-mx-6 px-6">
-          <Table className="w-full min-w-[600px]">
+        
+        {/* Table */}
+        <div className="overflow-x-auto">
+          <Table className="w-full">
             <TableHeader>
-              <TableRow className="border-b border-zinc-700 hover:bg-transparent">
-                {/* Mobile: Combined column, Desktop: Separate columns */}
-                <TableHead className="text-left p-3 text-white font-semibold md:hidden w-[180px]">
-                  SUBJECT
+              <TableRow className="border-b border-zinc-800/50 bg-zinc-900/50 hover:bg-zinc-900/50">
+                <TableHead className="text-left p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider md:hidden">
+                  Subject
                 </TableHead>
-                <TableHead className="text-left p-3 text-white font-semibold hidden md:table-cell">
-                  PAPER CODE
+                <TableHead className="text-left p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider hidden md:table-cell">
+                  Code
                 </TableHead>
-                <TableHead className="text-left p-3 text-white font-semibold hidden md:table-cell">
-                  SUBJECT NAME
+                <TableHead className="text-left p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider hidden md:table-cell">
+                  Subject Name
                 </TableHead>
                 {showMarksBreakdown && (
                   <>
-                    <TableHead className="text-center p-3 text-white font-semibold hidden md:table-cell">
-                      INTERNAL
+                    <TableHead className="text-center p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider hidden md:table-cell">
+                      Internal
                     </TableHead>
-                    <TableHead className="text-center p-3 text-white font-semibold hidden md:table-cell">
-                      EXTERNAL
+                    <TableHead className="text-center p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider hidden md:table-cell">
+                      External
                     </TableHead>
                   </>
                 )}
-                <TableHead className="text-center p-3 text-white font-semibold w-[70px]">
-                  TOTAL
+                <TableHead className="text-center p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider">
+                  Total
                 </TableHead>
-                <TableHead className="text-center p-3 text-white font-semibold">
-                  GRADE
+                <TableHead className="text-center p-4 text-zinc-400 font-semibold text-xs uppercase tracking-wider">
+                  Grade
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -303,44 +337,43 @@ export default function DetailedResultsTable({
                 return (
                   <TableRow
                     key={`${result.papercode}-${index}`}
-                    className="border-b border-zinc-800 hover:bg-zinc-800/50 transition-colors"
+                    className="border-b border-zinc-800/30 hover:bg-zinc-800/20 transition-colors animate-slide-up"
+                    style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     {/* Mobile: Combined column */}
-                    <TableCell className="p-3 text-zinc-200 md:hidden min-w-0 max-w-[200px]">
-                      <div className="flex flex-col min-w-0">
-                        <span className="text-xs text-zinc-400 font-mono mb-1 break-words">
+                    <TableCell className="p-4 md:hidden">
+                      <div className="flex flex-col gap-1">
+                        <span className="text-[10px] text-zinc-500 font-mono">
                           {result.papercode}
                         </span>
-                        <span className="text-sm md:text-base text-wrap">
+                        <span className="text-sm text-white">
                           {result.papername}
                         </span>
                       </div>
                     </TableCell>
-                    {/* Desktop: Separate columns */}
-                    <TableCell className="p-3 text-zinc-300 font-mono text-sm hidden md:table-cell">
+                    {/* Desktop columns */}
+                    <TableCell className="p-4 text-zinc-400 font-mono text-sm hidden md:table-cell">
                       {result.papercode}
                     </TableCell>
-                    <TableCell className="p-3 text-zinc-200 hidden md:table-cell">
+                    <TableCell className="p-4 text-white hidden md:table-cell">
                       {result.papername}
                     </TableCell>
                     {showMarksBreakdown && (
                       <>
-                        <TableCell className="p-3 text-center text-zinc-300 hidden md:table-cell">
+                        <TableCell className="p-4 text-center text-zinc-400 hidden md:table-cell">
                           {result.minorprint === "-" ? "-" : result.minorprint}
                         </TableCell>
-                        <TableCell className="p-3 text-center text-zinc-300 hidden md:table-cell">
+                        <TableCell className="p-4 text-center text-zinc-400 hidden md:table-cell">
                           {result.majorprint}
                         </TableCell>
                       </>
                     )}
-                    <TableCell className="p-3 text-center text-white font-semibold w-[70px]">
+                    <TableCell className={`p-4 text-center font-bold ${getMarksColor(totalMarks)}`}>
                       {result.moderatedprint}
                     </TableCell>
-                    <TableCell className="p-3 text-center">
+                    <TableCell className="p-4 text-center">
                       <span
-                        className={`px-2 py-1 rounded text-sm font-semibold ${getGradeBadgeClass(
-                          grade
-                        )}`}
+                        className={`inline-flex px-3 py-1 rounded-lg text-xs font-bold border shadow-sm ${getGradeBadgeClass(grade)}`}
                       >
                         {grade}
                       </span>
@@ -351,12 +384,13 @@ export default function DetailedResultsTable({
             </TableBody>
           </Table>
           {results.length === 0 && (
-            <div className="text-center py-8 text-zinc-400">
-              No subjects found for the selected semester
+            <div className="text-center py-12 text-zinc-500">
+              <FileText className="w-12 h-12 mx-auto mb-3 opacity-30" />
+              <p>No subjects found for the selected semester</p>
             </div>
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { TrendingUp, Award, Percent, BookOpen } from "lucide-react";
 
 interface SemesterStatsCardProps {
   totalMarks: number;
@@ -17,49 +17,98 @@ export default function SemesterStatsCard({
   percentage,
   totalCredits,
 }: SemesterStatsCardProps) {
+  const stats = [
+    {
+      label: "Total Marks",
+      value: totalMarks,
+      subValue: `/ ${maxMarks}`,
+      description: "Marks Obtained",
+      icon: TrendingUp,
+      color: "from-purple-500 to-violet-600",
+      delay: "stagger-1",
+    },
+    {
+      label: "SGPA",
+      value: sgpa.toFixed(2),
+      subValue: "/ 10",
+      description: "Semester GPA",
+      icon: Award,
+      color: "from-fuchsia-500 to-pink-600",
+      delay: "stagger-2",
+    },
+    {
+      label: "Percentage",
+      value: percentage.toFixed(1),
+      subValue: "%",
+      description: "Overall Score",
+      icon: Percent,
+      color: "from-violet-500 to-indigo-600",
+      delay: "stagger-3",
+    },
+    {
+      label: "Credits",
+      value: totalCredits,
+      subValue: "",
+      description: "Total Credits",
+      icon: BookOpen,
+      color: "from-indigo-500 to-blue-600",
+      delay: "stagger-4",
+    },
+  ];
+
   return (
-    <Card className="bg-zinc-900/95 border-zinc-800">
-      <CardContent className="p-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {/* MARKS */}
-          <div className="space-y-2">
-            <p className="text-xs text-zinc-500 uppercase tracking-wider">
-              Marks
-            </p>
-            <p className="text-3xl font-bold text-primary">
-              {totalMarks} <span className="text-xl text-zinc-500">/ {maxMarks}</span>
-            </p>
-            <p className="text-xs text-zinc-400">Total Marks Obtained</p>
-          </div>
-
-          {/* SGPA */}
-          <div className="space-y-2">
-            <p className="text-xs text-zinc-500 uppercase tracking-wider">SGPA</p>
-            <p className="text-3xl font-bold text-primary">{sgpa.toFixed(3)}</p>
-            <p className="text-xs text-zinc-400">Semester Grade Point Average</p>
-          </div>
-
-          {/* PERCENTAGE */}
-          <div className="space-y-2">
-            <p className="text-xs text-zinc-500 uppercase tracking-wider">
-              Percentage
-            </p>
-            <p className="text-3xl font-bold text-primary">
-              {percentage.toFixed(2)}%
-            </p>
-            <p className="text-xs text-zinc-400">Percentage of Marks Obtained</p>
-          </div>
-
-          {/* TOTAL CREDITS */}
-          <div className="space-y-2">
-            <p className="text-xs text-zinc-500 uppercase tracking-wider">
-              Total Credits
-            </p>
-            <p className="text-3xl font-bold text-primary">{totalCredits}</p>
-            <p className="text-xs text-zinc-400">Total Credits for the Semester</p>
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {stats.map((stat, index) => (
+        <div
+          key={stat.label}
+          className={`relative group animate-slide-up ${stat.delay}`}
+          style={{ animationDelay: `${index * 0.1}s` }}
+        >
+          {/* Floating card with 3D effect */}
+          <div className="relative h-full">
+            {/* Glow effect behind card */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />
+            
+            {/* Main card */}
+            <div className="relative h-full glass rounded-2xl border border-zinc-800/50 p-5 overflow-hidden transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-1 group-hover:border-purple-500/30">
+              {/* Animated background gradient */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
+              
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100" />
+              
+              {/* Floating icon */}
+              <div className="relative z-10">
+                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${stat.color} mb-4 transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 animate-float`} style={{ animationDuration: `${3 + index * 0.5}s` }}>
+                  <stat.icon className="w-5 h-5 text-white" />
+                </div>
+                
+                <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">
+                  {stat.label}
+                </p>
+                
+                <div className="flex items-baseline gap-1">
+                  <span className="text-3xl md:text-4xl font-bold text-white tabular-nums">
+                    {stat.value}
+                  </span>
+                  {stat.subValue && (
+                    <span className="text-lg text-zinc-500 font-medium">
+                      {stat.subValue}
+                    </span>
+                  )}
+                </div>
+                
+                <p className="text-xs text-zinc-500 mt-2">
+                  {stat.description}
+                </p>
+              </div>
+              
+              {/* Corner decoration */}
+              <div className="absolute -bottom-4 -right-4 w-20 h-20 rounded-full bg-gradient-to-br from-purple-500/10 to-transparent blur-xl" />
+            </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      ))}
+    </div>
   );
 }
