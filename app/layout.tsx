@@ -6,6 +6,7 @@ import {
   generateMetadataUtil,
   generateViewport,
 } from "@/utils/generateMetadata";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = generateMetadataUtil({
   title: "IPURESULT",
@@ -41,6 +42,7 @@ export default function RootLayout({
         {children}
         <Toaster />
         <BackToTopButton />
+        <Analytics />
       </body>
     </html>
   );
