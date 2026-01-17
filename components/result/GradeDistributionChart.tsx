@@ -9,14 +9,14 @@ import {
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 const GRADE_COLORS: Record<string, string> = {
-  O: "#d9f99d", // lime-200 - brightest (90-100)
-  "A+": "#bef264", // lime-300 (75-89)
-  A: "#a3e635", // lime-400 (65-74)
-  "B+": "#84cc16", // lime-500 (55-64)
-  B: "#65a30d", // lime-600 (50-54)
-  C: "#4d7c0f", // lime-700 (45-49)
-  P: "#65a30d", // lime-600 (40-44) - lighter for visibility
-  F: "#4d7c0f", // lime-700 (<40) - lighter but still darker than P
+  O: "#e9d5ff", // purple-200 - brightest (90-100)
+  "A+": "#d8b4fe", // purple-300 (75-89)
+  A: "#c084fc", // purple-400 (65-74)
+  "B+": "#a855f7", // purple-500 (55-64)
+  B: "#9333ea", // purple-600 (50-54)
+  C: "#7e22ce", // purple-700 (45-49)
+  P: "#9333ea", // purple-600 (40-44) - lighter for visibility
+  F: "#7e22ce", // purple-700 (<40) - lighter but still darker than P
 };
 
 interface GradeDistributionChartProps {

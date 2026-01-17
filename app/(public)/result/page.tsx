@@ -339,7 +339,7 @@ export default function ResultsPage() {
       <div
         className="absolute inset-0 opacity-5"
         style={{
-          backgroundImage: `linear-gradient(#a3ff19 1px, transparent 1px), linear-gradient(90deg, #a3ff19 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(#a855f7 1px, transparent 1px), linear-gradient(90deg, #a855f7 1px, transparent 1px)`,
           backgroundSize: "50px 50px",
         }}
       ></div>
@@ -452,9 +452,9 @@ export default function ResultsPage() {
                   <div className="flex flex-col items-center gap-6">
                     {/* Animated Spinner */}
                     <div className="relative">
-                      <div className="absolute inset-0 rounded-full bg-lime-500/20 blur-xl animate-pulse"></div>
+                      <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-xl animate-pulse"></div>
                       <div className="relative bg-zinc-800 rounded-full p-4 border border-zinc-700">
-                        <Loader2 className="w-12 h-12 text-lime-500 animate-spin" />
+                        <Loader2 className="w-12 h-12 text-purple-500 animate-spin" />
                       </div>
                     </div>
 
@@ -470,9 +470,9 @@ export default function ResultsPage() {
 
                     {/* Animated Dots */}
                     <div className="flex gap-2">
-                      <div className="w-2 h-2 bg-lime-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                      <div className="w-2 h-2 bg-lime-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                      <div className="w-2 h-2 bg-lime-500 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"></div>
                     </div>
                   </div>
                 </CardContent>

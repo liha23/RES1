@@ -31,7 +31,7 @@ export default function GPATrendChart({ data }: GPATrendChartProps) {
             config={{
               sgpa: {
                 label: "SGPA",
-                color: "#84cc16",
+                color: "#a855f7",
               },
             }}
             className="h-[250px] w-full"
@@ -54,14 +54,14 @@ export default function GPATrendChart({ data }: GPATrendChartProps) {
                 />
                 <ChartTooltip
                   content={<ChartTooltipContent />}
-                  cursor={{ stroke: "#84cc16" }}
+                  cursor={{ stroke: "#a855f7" }}
                 />
                 <Line
                   type="monotone"
                   dataKey="sgpa"
-                  stroke="#84cc16"
+                  stroke="#a855f7"
                   strokeWidth={3}
-                  dot={{ fill: "#84cc16", r: 5 }}
+                  dot={{ fill: "#a855f7", r: 5 }}
                 />
               </LineChart>
             </ResponsiveContainer>

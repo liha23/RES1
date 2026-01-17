@@ -49,11 +49,11 @@ export default function SemesterBarChart({ subjects }: SemesterBarChartProps) {
             config={{
               internalMarks: {
                 label: "Internal",
-                color: "#84cc16",
+                color: "#a855f7",
               },
               externalMarks: {
                 label: "External",
-                color: "#e0ff07",
+                color: "#e9d5ff",
               },
             }}
             className="h-[300px] w-full"
@@ -106,8 +106,8 @@ export default function SemesterBarChart({ subjects }: SemesterBarChartProps) {
                     return null;
                   }}
                 />
-                <Bar dataKey="internalMarks" stackId="a" fill="#84cc16" />
-                <Bar dataKey="externalMarks" stackId="a" fill="#e0ff07" />
+                <Bar dataKey="internalMarks" stackId="a" fill="#a855f7" />
+                <Bar dataKey="externalMarks" stackId="a" fill="#e9d5ff" />
               </BarChart>
             </ResponsiveContainer>
           </ChartContainer>

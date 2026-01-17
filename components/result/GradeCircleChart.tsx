@@ -64,14 +64,14 @@ export default function GradeCircleChart({ subjects }: GradeCircleChartProps) {
 
   const chartConfig = {
     count: { label: "Subjects" },
-    o: { label: "O", color: "#84cc16" },
-    aPlus: { label: "A+", color: "#a3e635" },
-    a: { label: "A", color: "#84cc16" },
-    bPlus: { label: "B+", color: "#65a30d" },
-    b: { label: "B", color: "#4d7c0f" },
-    c: { label: "C", color: "#365314" },
-    p: { label: "P", color: "#4d7c0f" },
-    f: { label: "F", color: "#365314" },
+    o: { label: "O", color: "#a855f7" },
+    aPlus: { label: "A+", color: "#c084fc" },
+    a: { label: "A", color: "#a855f7" },
+    bPlus: { label: "B+", color: "#9333ea" },
+    b: { label: "B", color: "#7e22ce" },
+    c: { label: "C", color: "#6b21a8" },
+    p: { label: "P", color: "#7e22ce" },
+    f: { label: "F", color: "#6b21a8" },
   } satisfies ChartConfig;
 
   const top = chartData.reduce<{ gradeLabel: string; count: number } | null>(

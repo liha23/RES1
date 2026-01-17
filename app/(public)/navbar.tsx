@@ -1,6 +1,6 @@
 "use client";
 
-import { Brain } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -13,9 +13,9 @@ export default function Navbar() {
             href="/result"
             className="flex items-center cursor-pointer hover:opacity-90 transition-all duration-300 group whitespace-nowrap"
           >
-            <Brain className="me-[5px] h-5 w-5 text-primary" />
+            <GraduationCap className="me-[5px] h-5 w-5 text-primary" />
             <span className="text-xl font-bold bg-linear-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent group-hover:from-primary group-hover:to-primary-dark transition-all duration-300">
-              GGSIPU Result
+              IPU Grade Portal
             </span>
           </Link>
         </div>

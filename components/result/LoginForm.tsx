@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AlertCircle, RefreshCw, Brain, Eye, EyeOff } from "lucide-react";
+import { AlertCircle, RefreshCw, GraduationCap, Eye, EyeOff } from "lucide-react";
 
 interface LoginFormProps {
   enrollmentNumber: string;
@@ -41,38 +41,6 @@ export default function LoginForm({
 
   return (
     <>
-      {/* Password Information Warning Box */}
-      <Card className="w-full max-w-xl mx-auto py-1.5 mb-4 border-orange-500/30 bg-orange-950/20 relative">
-        <CardContent className="p-3">
-          <div className="flex items-start gap-2">
-            <AlertCircle className="h-4 w-4 text-yellow-500 flex-shrink-0 mt-0.5" />
-            <div className="flex-1">
-              <h3 className="font-bold text-white text-sm mb-1.5">
-                Password Information
-              </h3>
-              <p className="text-white text-xs mb-2">
-                Please double-check the following before entering your password:
-              </p>
-              <ul className="text-white text-xs space-y-1 list-disc list-inside">
-                <li>
-                  Default password is your{" "}
-                  <span className="text-yellow-500 font-semibold">
-                    father's full name in CAPITAL LETTERS
-                  </span>
-                </li>
-                <li>
-                  Ensure space between words as per registered father's name
-                </li>
-                <li>
-                  3 Wrong attempts will lead to temporary account lockout. Enter
-                  password wisely
-                </li>
-              </ul>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Login Form Card */}
       <Card className="bg-zinc-900 border-zinc-800 w-full max-w-xl mx-auto relative">
         <CardContent className="p-6">
@@ -82,12 +50,12 @@ export default function LoginForm({
             <div className="relative inline-flex mb-5">
               <div className="absolute inset-0 bg-primary rounded-2xl blur-xl opacity-50 animate-pulse"></div>
               <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-black shadow-xl transform transition-transform hover:scale-110 duration-300">
-                <Brain className="h-8 w-8" strokeWidth={2.5} />
+                <GraduationCap className="h-8 w-8" strokeWidth={2.5} />
               </div>
             </div>
 
             <h1 className="text-3xl font-black text-white tracking-tight mb-2">
-              GGSIPU Results
+              IPU Grade Portal
             </h1>
             <p className="text-zinc-400 text-sm font-medium">
               Enter your credentials to view your result analysis
@@ -201,7 +169,7 @@ export default function LoginForm({
             <Button
               type="submit"
               disabled={isLoading || isLoadingCaptcha}
-              className="w-full bg-primary hover:bg-lime-400 text-black font-semibold py-4 text-base"
+              className="w-full bg-primary hover:bg-purple-400 text-black font-semibold py-4 text-base"
             >
               {isLoading ? "Logging in..." : "Login"}
             </Button>
