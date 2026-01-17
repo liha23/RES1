@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ProcessedData } from "../../app/(public)/result/types";
-import { ArrowLeft, GraduationCap, Building2, Calendar, Award, BookOpen } from "lucide-react";
+import { LogOut, GraduationCap, Building2, Calendar, Award, BookOpen } from "lucide-react";
 
 interface StudentHeaderProps {
   data: ProcessedData;
@@ -181,7 +181,7 @@ export default function StudentHeader({
                 variant="outline"
                 className="border-red-700 bg-red-800/80 hover:bg-red-700/80 text-white hover:border-red-500/30 transition-all duration-300 w-full sm:w-auto"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <LogOut className="w-4 h-4 mr-2" />
                 Logout
               </Button>
               
