@@ -8,14 +8,14 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 import { Award } from "lucide-react";
 
 const GRADE_COLORS: Record<string, { main: string; gradient: string }> = {
-  O: { main: "#e9d5ff", gradient: "from-purple-200 to-purple-300" },
-  "A+": { main: "#d8b4fe", gradient: "from-purple-300 to-purple-400" },
-  A: { main: "#c084fc", gradient: "from-purple-400 to-purple-500" },
-  "B+": { main: "#a855f7", gradient: "from-purple-500 to-purple-600" },
-  B: { main: "#9333ea", gradient: "from-purple-600 to-purple-700" },
-  C: { main: "#7e22ce", gradient: "from-purple-700 to-purple-800" },
-  P: { main: "#6b21a8", gradient: "from-purple-800 to-purple-900" },
-  F: { main: "#581c87", gradient: "from-purple-900 to-purple-950" },
+  O: { main: "#a3e635", gradient: "from-lime-400 to-emerald-400" },
+  "A+": { main: "#e879f9", gradient: "from-fuchsia-400 to-pink-400" },
+  A: { main: "#22d3ee", gradient: "from-cyan-400 to-blue-400" },
+  "B+": { main: "#38bdf8", gradient: "from-sky-400 to-indigo-400" },
+  B: { main: "#fbbf24", gradient: "from-amber-400 to-orange-400" },
+  C: { main: "#fb923c", gradient: "from-orange-400 to-red-400" },
+  P: { main: "#a78bfa", gradient: "from-violet-400 to-purple-400" },
+  F: { main: "#f87171", gradient: "from-red-500 to-rose-500" },
 };
 
 interface GradeDistributionChartProps {
@@ -68,34 +68,34 @@ export default function GradeDistributionChart({
 
   return (
     <div className="relative group animate-slide-up stagger-2">
-      {/* Glow effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-pink-600/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
+      {/* Vibrant glow effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/30 via-purple-500/20 to-cyan-500/30 rounded-2xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
       
       {/* Main card */}
-      <div className="relative glass rounded-2xl border border-zinc-800/50 overflow-hidden transform transition-all duration-500 group-hover:border-purple-500/30">
+      <div className="relative glass rounded-2xl border-2 border-transparent bg-gradient-to-br from-fuchsia-500/10 via-purple-500/5 to-cyan-500/10 overflow-hidden transform transition-all duration-500 group-hover:border-fuchsia-400/40 shadow-xl">
         {/* Header */}
         <div className="p-4 sm:p-6 pb-0">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-0 mb-3 sm:mb-4">
             <div>
-              <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                <span className="inline-flex p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-fuchsia-500 to-pink-600 mr-1 animate-float" style={{ animationDuration: '4.5s' }}>
+              <h3 className="text-base sm:text-lg font-bold flex items-center gap-2">
+                <span className="inline-flex p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-fuchsia-500 via-purple-500 to-pink-500 mr-1 animate-float shadow-xl shadow-fuchsia-500/50" style={{ animationDuration: '4.5s' }}>
                   <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
                 </span>
-                GRADE SPECTRUM
+                <span className="bg-gradient-to-r from-fuchsia-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">GRADE SPECTRUM</span>
               </h3>
-              <p className="text-xs sm:text-sm text-zinc-500 mt-0.5 sm:mt-1">Distribution across all subjects</p>
+              <p className="text-xs sm:text-sm text-zinc-400 mt-0.5 sm:mt-1">Distribution across all subjects</p>
             </div>
             
             {/* Stats */}
             <div className="flex gap-2 items-start">
-              <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/30">
-                <span className="text-[10px] sm:text-xs text-zinc-400">Total: </span>
-                <span className="text-xs sm:text-sm font-bold text-fuchsia-400">{totalSubjects}</span>
+              <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-fuchsia-500/30 to-pink-500/20 border border-fuchsia-400/50">
+                <span className="text-[10px] sm:text-xs text-fuchsia-300">Total: </span>
+                <span className="text-xs sm:text-sm font-bold text-white">{totalSubjects}</span>
               </div>
               {topGrade && (
-                <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-green-500/20 border border-green-500/30">
-                  <span className="text-[10px] sm:text-xs text-zinc-400">Most: </span>
-                  <span className="text-xs sm:text-sm font-bold text-green-400">{topGrade.grade}</span>
+                <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-lime-500/30 to-emerald-500/20 border border-lime-400/50">
+                  <span className="text-[10px] sm:text-xs text-lime-300">Most: </span>
+                  <span className="text-xs sm:text-sm font-bold text-white">{topGrade.grade}</span>
                 </div>
               )}
             </div>
