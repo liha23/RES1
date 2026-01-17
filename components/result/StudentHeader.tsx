@@ -3,19 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ProcessedData } from "../../app/(public)/result/types";
-import { ArrowLeft, Download, ChevronDown } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { exportResultToPDF } from "@/lib/pdfExport";
-import { toast } from "sonner";
-import { useUser, SignInButton } from "@clerk/nextjs";
-import { usePathname, useSearchParams } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 
 interface StudentHeaderProps {
   data: ProcessedData;
@@ -30,17 +18,7 @@ export default function StudentHeader({
   selectedSemester,
   onSemesterChange,
   onReset,
-  showMarksBreakdown,
 }: StudentHeaderProps) {
-  const { isSignedIn } = useUser();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  // Build current URL to redirect back after sign-in
-  const currentUrl = searchParams.toString()
-    ? `${pathname}?${searchParams.toString()}`
-    : pathname;
-
   return (
     <Card className="bg-zinc-900/95 border-zinc-800">
       <CardContent className="p-6">
@@ -110,9 +88,7 @@ export default function StudentHeader({
                   {selectedSemester === "OVERALL" && (
                     <span className="absolute inset-0 rounded-lg bg-primary/20 blur-md -z-10" />
                   )}
-                  <span className="flex items-center gap-2">
-                    Overall
-                  </span>
+                  <span className="flex items-center gap-2">Overall</span>
                 </button>
                 {data.semesters.map((sem) => (
                   <button
@@ -147,73 +123,6 @@ export default function StudentHeader({
                 <ArrowLeft className="w-4 h-4" />
                 Back
               </Button>
-              {isSignedIn ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className="border-primary/50 bg-primary/10 hover:bg-primary/20 text-primary gap-2"
-                    >
-                      <Download className="w-4 h-4" />
-                      Export PDF
-                      <ChevronDown className="w-4 h-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    align="end"
-                    className="bg-zinc-900 border-zinc-700 min-w-[180px]"
-                  >
-                    <DropdownMenuLabel className="text-zinc-400 text-xs">
-                      Select Export Option
-                    </DropdownMenuLabel>
-                    <DropdownMenuSeparator className="bg-zinc-700" />
-                    <DropdownMenuItem
-                      className="text-white hover:bg-zinc-800 cursor-pointer gap-2"
-                      onClick={async () => {
-                        await exportResultToPDF({
-                          processedData: data,
-                          semester: "OVERALL",
-                          showMarksBreakdown,
-                        });
-                        toast.success("PDF exported successfully!");
-                      }}
-                    >
-                      <span className="w-2 h-2 rounded-full bg-primary" />
-                      Complete Result (All Semesters)
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator className="bg-zinc-700" />
-                    {data.semesters.map((sem) => (
-                      <DropdownMenuItem
-                        key={sem.euno}
-                        className="text-white hover:bg-zinc-800 cursor-pointer gap-2"
-                        onClick={async () => {
-                          await exportResultToPDF({
-                            processedData: data,
-                            semester: sem.euno,
-                            showMarksBreakdown,
-                          });
-                          toast.success(
-                            `Semester ${sem.euno} PDF exported successfully!`
-                          );
-                        }}
-                      >
-                        <span className="w-2 h-2 rounded-full bg-zinc-500" />
-                        Semester {sem.euno}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <SignInButton mode="modal" fallbackRedirectUrl={currentUrl}>
-                  <Button
-                    variant="outline"
-                    className="border-primary/50 bg-primary/10 hover:bg-primary/20 text-primary gap-2"
-                  >
-                    <Download className="w-4 h-4" />
-                    Export PDF
-                  </Button>
-                </SignInButton>
-              )}
             </div>
             <div className="bg-linear-to-br from-primary/20 to-primary/5 border border-primary/30 rounded-lg p-6 min-w-[200px]">
               <p className="text-sm text-neutral-100 mb-1">CUMULATIVE GPA</p>

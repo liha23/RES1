@@ -14,11 +14,11 @@ export interface PageMetadata {
 }
 
 export function generateMetadataUtil(pageData: PageMetadata): Metadata {
-  const baseTitle = "Smriti AI";
+  const baseTitle = "GGSIPU Result";
   const defaultDescription =
-    "Smriti AI is an online learning platform which helps you to learn faster and remember better. Turn any PDF, YouTube video, into AI-powered flashcards, summaries, and mind maps instantly.";
+    "Check GGSIPU (IPU) results instantly: semester-wise marks, CGPA, SGPA, subject grades. Fast, mobile-friendly portal for Guru Gobind Singh Indraprastha University students.";
   const defaultImage = "/opengraph-image.png";
-  const siteUrl = "https://www.smriti.live/";
+  const siteUrl = "https://www.smriti.live/result";
 
   const fullTitle =
     pageData.title === baseTitle ||
@@ -38,10 +38,10 @@ export function generateMetadataUtil(pageData: PageMetadata): Metadata {
     title: fullTitle,
     description,
     keywords: pageData.keywords || [
-      "smriti ai",
-      "ai tutor",
-      "ai tool",
-      "online learning platform",
+      "GGSIPU result",
+      "IPU result",
+      "GGSIPU result 2025",
+      "check GGSIPU result",
     ],
     applicationName: baseTitle,
     metadataBase: new URL(siteUrl),
