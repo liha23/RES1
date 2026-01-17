@@ -445,7 +445,7 @@ export default function ResultsPage() {
                 <Button
                   onClick={handleReset}
                   variant="outline"
-                  className="group relative border-zinc-700 bg-zinc-800/80 hover:bg-zinc-700/80 text-white hover:border-purple-500/30 transition-all duration-300 px-6 py-5"
+                  className="group relative border-zinc-700 bg-zinc-800/80 hover:bg-zinc-700/80 text-white hover:border-purple-500/30 transition-all duration-300 px-4 sm:px-6 py-3 sm:py-5 text-sm sm:text-base"
                 >
                   <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity" />
                   <Sparkles className="w-4 h-4 mr-2 text-purple-400 group-hover:animate-pulse" />
