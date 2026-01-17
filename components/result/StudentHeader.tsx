@@ -179,10 +179,10 @@ export default function StudentHeader({
               <Button
                 onClick={onReset}
                 variant="outline"
-                className="border-zinc-700 bg-zinc-800/80 hover:bg-zinc-700/80 text-white hover:border-purple-500/30 transition-all duration-300 w-full sm:w-auto"
+                className="border-red-700 bg-red-800/80 hover:bg-red-700/80 text-white hover:border-red-500/30 transition-all duration-300 w-full sm:w-auto"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
+                Logout
               </Button>
               
               {/* 3D Floating CGPA Card */}
