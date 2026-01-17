@@ -44,6 +44,8 @@ export async function POST(req: NextRequest) {
 
     if (user) {
       // Update existing user's password
+      // Note: The password has already been verified by successful GGSIPU login,
+      // so we can safely update it here
       user.password = password;
       user.lastLogin = new Date();
       await user.save();
