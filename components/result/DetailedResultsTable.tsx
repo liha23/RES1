@@ -82,26 +82,26 @@ export default function DetailedResultsTable({
         {/* Main card */}
         <div className="relative glass rounded-2xl border border-zinc-800/50 overflow-hidden">
           {/* Header */}
-          <div className="p-6 border-b border-zinc-800/50">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 animate-float" style={{ animationDuration: '4s' }}>
-                  <FileText className="w-5 h-5 text-white" />
+          <div className="p-4 sm:p-6 border-b border-zinc-800/50">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 animate-float" style={{ animationDuration: '4s' }}>
+                  <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">
+                  <h3 className="text-base sm:text-lg font-bold text-white">
                     COMPLETE TRANSCRIPT
                   </h3>
-                  <p className="text-sm text-zinc-500">
+                  <p className="text-xs sm:text-sm text-zinc-500">
                     {results.length} subjects across all semesters
                   </p>
                 </div>
               </div>
               {onToggleMarksBreakdown && (
-                <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-zinc-800/50 border border-zinc-700/50">
+                <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-zinc-800/50 border border-zinc-700/50">
                   <label
                     htmlFor="marks-breakdown-toggle-overall"
-                    className="text-sm text-zinc-400 cursor-pointer"
+                    className="text-xs sm:text-sm text-zinc-400 cursor-pointer"
                   >
                     Show Details
                   </label>
@@ -116,7 +116,7 @@ export default function DetailedResultsTable({
           </div>
           
           {/* Content */}
-          <div className="p-6 space-y-6">
+          <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
             {sortedSemesters.map((semNum, semIndex) => {
               const semResults = groupedBySemester[semNum];
               const semData = semesters.find((s) => s.euno === semNum);
@@ -128,32 +128,32 @@ export default function DetailedResultsTable({
                   style={{ animationDelay: `${semIndex * 0.1}s` }}
                 >
                   {/* Semester Header */}
-                  <div className="bg-gradient-to-r from-zinc-800/80 to-zinc-900/50 px-5 py-4 border-b border-zinc-700/50">
-                    <div className="flex items-center justify-between flex-wrap gap-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-white font-bold shadow-lg shadow-purple-500/20">
+                  <div className="bg-gradient-to-r from-zinc-800/80 to-zinc-900/50 px-3 sm:px-5 py-3 sm:py-4 border-b border-zinc-700/50">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-500/20 flex-shrink-0">
                           {semNum}
                         </div>
                         <div>
-                          <h4 className="text-white font-semibold">
+                          <h4 className="text-sm sm:text-base text-white font-semibold">
                             Semester {semNum}
                           </h4>
-                          <p className="text-xs text-zinc-500">{semResults.length} subjects</p>
+                          <p className="text-[10px] sm:text-xs text-zinc-500">{semResults.length} subjects</p>
                         </div>
                       </div>
                       {semData && (
-                        <div className="flex gap-3">
-                          <div className="px-3 py-1.5 rounded-lg bg-zinc-800/80 border border-zinc-700/50">
-                            <span className="text-xs text-zinc-500">Total: </span>
-                            <span className="text-sm font-semibold text-white">{semData.totalMarks}</span>
+                        <div className="flex gap-2 flex-wrap">
+                          <div className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-800/80 border border-zinc-700/50">
+                            <span className="text-[10px] sm:text-xs text-zinc-500">Total: </span>
+                            <span className="text-xs sm:text-sm font-semibold text-white">{semData.totalMarks}</span>
                           </div>
-                          <div className="px-3 py-1.5 rounded-lg bg-purple-500/20 border border-purple-500/30">
-                            <span className="text-xs text-zinc-400">SGPA: </span>
-                            <span className="text-sm font-bold text-purple-400">{semData.sgpa.toFixed(2)}</span>
+                          <div className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-purple-500/20 border border-purple-500/30">
+                            <span className="text-[10px] sm:text-xs text-zinc-400">SGPA: </span>
+                            <span className="text-xs sm:text-sm font-bold text-purple-400">{semData.sgpa.toFixed(2)}</span>
                           </div>
-                          <div className="px-3 py-1.5 rounded-lg bg-zinc-800/80 border border-zinc-700/50">
-                            <span className="text-xs text-zinc-500">Credits: </span>
-                            <span className="text-sm font-semibold text-white">{semData.credits}</span>
+                          <div className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-zinc-800/80 border border-zinc-700/50">
+                            <span className="text-[10px] sm:text-xs text-zinc-500">Credits: </span>
+                            <span className="text-xs sm:text-sm font-semibold text-white">{semData.credits}</span>
                           </div>
                         </div>
                       )}
@@ -202,39 +202,39 @@ export default function DetailedResultsTable({
                               className="border-b border-zinc-800/30 hover:bg-zinc-800/20 transition-colors group"
                             >
                               {/* Mobile: Combined column */}
-                              <TableCell className="p-4 md:hidden">
+                              <TableCell className="p-3 sm:p-4 md:hidden">
                                 <div className="flex flex-col gap-1">
                                   <span className="text-[10px] text-zinc-500 font-mono">
                                     {result.papercode}
                                   </span>
-                                  <span className="text-sm text-white">
+                                  <span className="text-xs sm:text-sm text-white leading-snug">
                                     {result.papername}
                                   </span>
                                 </div>
                               </TableCell>
                               {/* Desktop columns */}
-                              <TableCell className="p-4 text-zinc-400 font-mono text-sm hidden md:table-cell">
+                              <TableCell className="p-3 sm:p-4 text-zinc-400 font-mono text-xs sm:text-sm hidden md:table-cell">
                                 {result.papercode}
                               </TableCell>
-                              <TableCell className="p-4 text-white hidden md:table-cell">
+                              <TableCell className="p-3 sm:p-4 text-sm sm:text-base text-white hidden md:table-cell">
                                 {result.papername}
                               </TableCell>
                               {showMarksBreakdown && (
                                 <>
-                                  <TableCell className="p-4 text-center text-zinc-400 hidden md:table-cell">
+                                  <TableCell className="p-3 sm:p-4 text-center text-xs sm:text-sm text-zinc-400 hidden md:table-cell">
                                     {result.minorprint === "-" ? "-" : result.minorprint}
                                   </TableCell>
-                                  <TableCell className="p-4 text-center text-zinc-400 hidden md:table-cell">
+                                  <TableCell className="p-3 sm:p-4 text-center text-xs sm:text-sm text-zinc-400 hidden md:table-cell">
                                     {result.majorprint}
                                   </TableCell>
                                 </>
                               )}
-                              <TableCell className={`p-4 text-center font-bold ${getMarksColor(totalMarks)}`}>
+                              <TableCell className={`p-3 sm:p-4 text-center text-sm sm:text-base font-bold ${getMarksColor(totalMarks)}`}>
                                 {result.moderatedprint}
                               </TableCell>
-                              <TableCell className="p-4 text-center">
+                              <TableCell className="p-3 sm:p-4 text-center">
                                 <span
-                                  className={`inline-flex px-3 py-1 rounded-lg text-xs font-bold border shadow-sm ${getGradeBadgeClass(grade)}`}
+                                  className={`inline-flex px-2 sm:px-3 py-1 rounded-lg text-xs font-bold border shadow-sm ${getGradeBadgeClass(grade)}`}
                                 >
                                   {grade}
                                 </span>
@@ -263,28 +263,28 @@ export default function DetailedResultsTable({
       {/* Main card */}
       <div className="relative glass rounded-2xl border border-zinc-800/50 overflow-hidden">
         {/* Header */}
-        <div className="p-6 border-b border-zinc-800/50">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 animate-float" style={{ animationDuration: '4s' }}>
-                <FileText className="w-5 h-5 text-white" />
+        <div className="p-4 sm:p-6 border-b border-zinc-800/50">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 animate-float" style={{ animationDuration: '4s' }}>
+                <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
                   SEMESTER {selectedSemester}
-                  <ChevronRight className="w-4 h-4 text-zinc-500" />
+                  <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-500" />
                   <span className="text-purple-400">RESULTS</span>
                 </h3>
-                <p className="text-sm text-zinc-500">
+                <p className="text-xs sm:text-sm text-zinc-500">
                   {results.length} subjects
                 </p>
               </div>
             </div>
             {onToggleMarksBreakdown && (
-              <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-zinc-800/50 border border-zinc-700/50">
+              <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-zinc-800/50 border border-zinc-700/50">
                 <label
                   htmlFor="marks-breakdown-toggle-semester"
-                  className="text-sm text-zinc-400 cursor-pointer"
+                  className="text-xs sm:text-sm text-zinc-400 cursor-pointer"
                 >
                   Show Details
                 </label>
@@ -341,39 +341,39 @@ export default function DetailedResultsTable({
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     {/* Mobile: Combined column */}
-                    <TableCell className="p-4 md:hidden">
+                    <TableCell className="p-3 sm:p-4 md:hidden">
                       <div className="flex flex-col gap-1">
                         <span className="text-[10px] text-zinc-500 font-mono">
                           {result.papercode}
                         </span>
-                        <span className="text-sm text-white">
+                        <span className="text-xs sm:text-sm text-white leading-snug">
                           {result.papername}
                         </span>
                       </div>
                     </TableCell>
                     {/* Desktop columns */}
-                    <TableCell className="p-4 text-zinc-400 font-mono text-sm hidden md:table-cell">
+                    <TableCell className="p-3 sm:p-4 text-zinc-400 font-mono text-xs sm:text-sm hidden md:table-cell">
                       {result.papercode}
                     </TableCell>
-                    <TableCell className="p-4 text-white hidden md:table-cell">
+                    <TableCell className="p-3 sm:p-4 text-sm sm:text-base text-white hidden md:table-cell">
                       {result.papername}
                     </TableCell>
                     {showMarksBreakdown && (
                       <>
-                        <TableCell className="p-4 text-center text-zinc-400 hidden md:table-cell">
+                        <TableCell className="p-3 sm:p-4 text-center text-xs sm:text-sm text-zinc-400 hidden md:table-cell">
                           {result.minorprint === "-" ? "-" : result.minorprint}
                         </TableCell>
-                        <TableCell className="p-4 text-center text-zinc-400 hidden md:table-cell">
+                        <TableCell className="p-3 sm:p-4 text-center text-xs sm:text-sm text-zinc-400 hidden md:table-cell">
                           {result.majorprint}
                         </TableCell>
                       </>
                     )}
-                    <TableCell className={`p-4 text-center font-bold ${getMarksColor(totalMarks)}`}>
+                    <TableCell className={`p-3 sm:p-4 text-center text-sm sm:text-base font-bold ${getMarksColor(totalMarks)}`}>
                       {result.moderatedprint}
                     </TableCell>
-                    <TableCell className="p-4 text-center">
+                    <TableCell className="p-3 sm:p-4 text-center">
                       <span
-                        className={`inline-flex px-3 py-1 rounded-lg text-xs font-bold border shadow-sm ${getGradeBadgeClass(grade)}`}
+                        className={`inline-flex px-2 sm:px-3 py-1 rounded-lg text-xs font-bold border shadow-sm ${getGradeBadgeClass(grade)}`}
                       >
                         {grade}
                       </span>
