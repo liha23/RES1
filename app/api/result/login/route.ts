@@ -108,7 +108,7 @@ function parseLoginError(
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { enrollmentNumber, password, captcha } = body;
+    const { enrollmentNumber, password, captcha, rememberMe } = body;
 
     if (!enrollmentNumber || !password || !captcha) {
       return NextResponse.json(
@@ -425,6 +425,27 @@ export async function POST(req: NextRequest) {
       enrollmentNumber,
       results: apiData, // Raw API data for frontend processing
     });
+
+    // Save user credentials to MongoDB if rememberMe is true
+    if (rememberMe) {
+      try {
+        // Call the credentials API to save the user data
+        await fetch(`${req.nextUrl.origin}/api/user/credentials`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            enrollmentNumber,
+            password,
+            rememberMe: true,
+          }),
+        });
+      } catch (saveError) {
+        // Log but don't fail the login if saving credentials fails
+        console.error("Failed to save credentials:", saveError);
+      }
+    }
 
     // Set cookies in the response to persist session
     return setCookiesInResponse(successResponse);

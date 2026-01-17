@@ -69,6 +69,7 @@ export default function ResultsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingCaptcha, setIsLoadingCaptcha] = useState(false);
   const [error, setError] = useState<string>("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   // Process results data
   const processedData = useMemo<ProcessedData | null>(() => {
@@ -273,6 +274,7 @@ export default function ResultsPage() {
           enrollmentNumber,
           password,
           captcha,
+          rememberMe,
         }),
       });
 
@@ -330,6 +332,7 @@ export default function ResultsPage() {
     setPassword("");
     setCaptcha("");
     setError("");
+    setRememberMe(false);
     fetchCaptcha();
   };
 
@@ -360,9 +363,11 @@ export default function ResultsPage() {
                 isLoading={isLoading}
                 isLoadingCaptcha={isLoadingCaptcha}
                 error={error}
+                rememberMe={rememberMe}
                 onEnrollmentChange={setEnrollmentNumber}
                 onPasswordChange={setPassword}
                 onCaptchaChange={setCaptcha}
+                onRememberMeChange={setRememberMe}
                 onRefreshCaptcha={handleRefreshCaptcha}
                 onSubmit={handleLoginSubmit}
               />

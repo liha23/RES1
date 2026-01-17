@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Switch } from "@/components/ui/switch";
 import { AlertCircle, RefreshCw, GraduationCap, Eye, EyeOff } from "lucide-react";
 
 interface LoginFormProps {
@@ -16,9 +17,11 @@ interface LoginFormProps {
   isLoading: boolean;
   isLoadingCaptcha: boolean;
   error: string;
+  rememberMe: boolean;
   onEnrollmentChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
   onCaptchaChange: (value: string) => void;
+  onRememberMeChange: (value: boolean) => void;
   onRefreshCaptcha: () => void;
   onSubmit: (e: React.FormEvent) => void;
 }
@@ -31,9 +34,11 @@ export default function LoginForm({
   isLoading,
   isLoadingCaptcha,
   error,
+  rememberMe,
   onEnrollmentChange,
   onPasswordChange,
   onCaptchaChange,
+  onRememberMeChange,
   onRefreshCaptcha,
   onSubmit,
 }: LoginFormProps) {
@@ -151,6 +156,23 @@ export default function LoginForm({
                     />
                   </Button>
                 </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between space-x-2">
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="remember-me"
+                  checked={rememberMe}
+                  onCheckedChange={onRememberMeChange}
+                  disabled={isLoading}
+                />
+                <Label
+                  htmlFor="remember-me"
+                  className="text-sm text-zinc-400 cursor-pointer"
+                >
+                  Remember my credentials securely
+                </Label>
               </div>
             </div>
 
