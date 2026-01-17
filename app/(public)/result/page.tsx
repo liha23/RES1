@@ -347,8 +347,8 @@ export default function ResultsPage() {
       {/* Global floating elements */}
       <FloatingElements variant="default" />
 
-      <div className="min-h-[70vh] p-4 relative">
-        <div className="w-full max-w-7xl mb-6 mx-auto">
+      <div className="min-h-[70vh] p-2 sm:p-4 relative">
+        <div className="w-full max-w-7xl mb-6 mx-auto px-2 sm:px-0">
           {!processedData && rawResults.length === 0 ? (
             // Show login form when no results
             <div className="w-full max-w-7xl mx-auto pb-8 flex flex-col items-center justify-center">

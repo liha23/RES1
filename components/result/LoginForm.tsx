@@ -42,8 +42,8 @@ export default function LoginForm({
   return (
     <>
       {/* Login Form Card */}
-      <Card className="bg-zinc-900 border-zinc-800 w-full max-w-xl mx-auto relative">
-        <CardContent className="p-6">
+      <Card className="bg-zinc-900 border-zinc-800 w-full max-w-xl mx-auto relative sm:max-w-xl">
+        <CardContent className="p-4 sm:p-6">
           {/* Header Section */}
           <div className="text-center mb-8">
             {/* Logo */}
@@ -55,7 +55,7 @@ export default function LoginForm({
             </div>
 
             <h1 className="text-3xl font-black text-white tracking-tight mb-2">
-              IPU Grade Portal
+              IPURESULT
             </h1>
             <p className="text-zinc-400 text-sm font-medium">
               Enter your credentials to view your result analysis
