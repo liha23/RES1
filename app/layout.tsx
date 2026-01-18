@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import BackToTopButton from "@/components/ui/BackToTopButton";
 import { SkipLinks } from "@/components/accessibility/SkipLinks";
 import {
   generateMetadataUtil,
@@ -41,7 +40,6 @@ export default function RootLayout({
 
         {children}
         <Toaster />
-        <BackToTopButton />
         <Analytics />
       </body>
     </html>
