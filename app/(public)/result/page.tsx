@@ -17,6 +17,20 @@ import LoginForm from "@/components/result/LoginForm";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
+function isValidResultArray(data: unknown): data is ResultAPIResponse[] {
+  return (
+    Array.isArray(data) &&
+    data.every(
+      (item) =>
+        item &&
+        typeof item === "object" &&
+        "papercode" in item &&
+        "nrollno" in item &&
+        "euno" in item
+    )
+  );
+}
+
 // Filter to only keep latest attempt for each subject code
 function filterLatestAttempts(
   subjects: ResultAPIResponse[]
@@ -221,8 +235,13 @@ export default function ResultsPage() {
     const storedResults = sessionStorage.getItem("resultData");
     if (storedResults) {
       try {
-        const results: ResultAPIResponse[] = JSON.parse(storedResults);
-        setRawResults(results);
+        const parsedResults: unknown = JSON.parse(storedResults);
+        if (isValidResultArray(parsedResults)) {
+          setRawResults(parsedResults);
+        } else {
+          sessionStorage.removeItem("resultData");
+          fetchCaptcha();
+        }
       } catch (error) {
         console.error("Error parsing stored results:", error);
         // If there's an error, show login form
@@ -290,7 +309,7 @@ export default function ResultsPage() {
         return;
       }
 
-      if (!data.results || data.results.length === 0) {
+      if (!isValidResultArray(data.results) || data.results.length === 0) {
         const errorMessage =
           "No results found. Please check your enrollment number.";
         setError(errorMessage);

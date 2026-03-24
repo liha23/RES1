@@ -48,6 +48,20 @@ interface ResultAPIResponse {
   eugpa: number;
 }
 
+function parseResultsPayload(data: unknown): ResultAPIResponse[] {
+  if (!Array.isArray(data)) return [];
+  return data.filter(
+    (item): item is ResultAPIResponse =>
+      Boolean(
+        item &&
+          typeof item === "object" &&
+          "papercode" in item &&
+          "nrollno" in item &&
+          "euno" in item
+      )
+  );
+}
+
 // Parse HTML error messages from login response
 function parseLoginError(
   html: string
@@ -215,13 +229,14 @@ export async function POST(req: NextRequest) {
 
     // Step 2: Hash the password (matching client-side behavior)
     // The website does: SHA-256(password + captcha) then base64 encodes it
-    const hashedPassword = hashPassword(password, captcha.toUpperCase());
+    const trimmedCaptcha = captcha.trim();
+    const hashedPassword = hashPassword(password, trimmedCaptcha);
 
     // Step 3: Submit login form
     const formData = new URLSearchParams();
     formData.append("username", enrollmentNumber); // Field name is "username" per the form
     formData.append("passwd", hashedPassword); // Field name is "passwd" not "password"
-    formData.append("captcha", captcha.toUpperCase());
+    formData.append("captcha", trimmedCaptcha);
 
     // Step 3: Submit login form (don't follow redirects - we need to capture cookies from 302 response)
     const loginResponse = await fetch(LOGIN_URL, {
@@ -404,7 +419,21 @@ export async function POST(req: NextRequest) {
     }
 
     // Parse JSON response - return raw API data for frontend filtering
-    const apiData: ResultAPIResponse[] = await resultApiResponse.json();
+    let parsedPayload: unknown;
+    try {
+      parsedPayload = await resultApiResponse.json();
+    } catch {
+      const errorResponse = NextResponse.json(
+        {
+          error: "Invalid response received while fetching results.",
+          details: "Please refresh captcha and login again.",
+        },
+        { status: 502 }
+      );
+      return setCookiesInResponse(errorResponse);
+    }
+
+    const apiData = parseResultsPayload(parsedPayload);
 
     if (!apiData || apiData.length === 0) {
       const errorResponse = NextResponse.json(
