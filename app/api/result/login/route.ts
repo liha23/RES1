@@ -425,7 +425,8 @@ export async function POST(req: NextRequest) {
     } catch {
       const errorResponse = NextResponse.json(
         {
-          error: "Invalid response received while fetching results.",
+          error:
+            "Result server returned malformed or non-JSON data while fetching results.",
           details: "Please refresh captcha and login again.",
         },
         { status: 502 }
